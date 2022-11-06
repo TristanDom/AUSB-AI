@@ -18,7 +18,6 @@ Aumento de robo de identidad / credenciales a usuarios en diferentes plataformas
 - Redes sociales. 
 
 ### Nuestra solucion🚀
-
 Teniendo en cuenta lo anterior, mediante el uso de tecnologias especificas se desarrolló  “AUSB-AI”, como una propuesta de solucion con las siguientes caracteristicas: 
 
 Análisis de páginas web por medio de recuperación de datos con “web scraping”, convirtiendo a código binario a imagen y siendo comparados por IA entrenada arrojando así un resultado de autenticidad o de falcedad y el  tráfico de dominios maliciosos o falsos.
