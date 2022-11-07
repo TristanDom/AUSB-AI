@@ -2,6 +2,7 @@
 Este es un programa que convierte código extraído de
 páginas web en código binario almacenándolo en archivos txt con la ruta deseada."""
 
+#Se ingresa de manera el archivo a convertir.
 ruta = input("Ingrese si el archivo procede de una página confiable o no: ")
 if ruta == "si" or ruta == "Si" or ruta == "SI" or ruta == "s":
     print("Ha seleccionado un archivo confiable.")
