@@ -2,9 +2,36 @@
 Este es un programa que convierte código extraído de
 páginas web en código binario almacenándolo en archivos txt con la ruta deseada."""
 
-#Por medio de la función open() se abre el archivo que se desea leer.
-with open('PaginasEscaneadas/Codigos de paginas/Paginas confiables/Wikipedia.html') as archivo:
-    contenido = archivo.read()
+ruta = input("Ingrese si el archivo procede de una página confiable o no: ")
+if ruta == "si" or ruta == "Si" or ruta == "SI" or ruta == "s":
+    print("Ha seleccionado un archivo confiable.")
+    ruta = 'PaginasEscaneadas/Codigos de paginas/PaginasConfiables/'
+
+elif ruta == "no" or ruta == "No" or ruta == "NO" or ruta == "n":
+    print("Ha seleccionado un archivo no confiable.")
+    ruta = 'PaginasEscaneadas/Codigos de paginas/PaginasNoConfiables/'
+
+nombre = input("Ingrese el nombre del archivo: ")
+
+tipo = input("Ingrese el tipo de archivo: ")
+
+rutaCompleta = ruta + nombre + "." + tipo
+
+if tipo == 'txt':
+    print("Archivo de tipo txt leído correctamente.")
+    print(rutaCompleta)
+    with open(rutaCompleta) as archivo:
+        contenido = archivo.read()
+        
+elif tipo == 'html':
+    print("Archivo de tipo html leído correctamente.")
+    print(rutaCompleta)
+    with open(rutaCompleta) as archivo:
+        contenido = archivo.read()
+        
+# #Por medio de la función open() se abre el archivo que se desea leer.
+# with open('Wikipedia.html') as archivo:
+#     contenido = archivo.read()
 
 #Por medio de la fución ascii_a_binario() se convierte carcateres a binario.
 def ascii_a_binario(letra):
