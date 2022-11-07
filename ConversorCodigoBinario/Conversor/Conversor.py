@@ -28,7 +28,7 @@ def texto_a_binario(texto):
 # print(texto_a_binario(contenido))
 
 #Con la implementación de la segunda fución open se sobre esccribe el resultado de convetir cadenas de texto a código binario.
-with open('ConversorCodigoBinario/CodigoConvertido/resultariobinario.txt', 'w') as archivo:
+with open('GeneradorImagen/resultariobinario.txt', 'w') as archivo:
      archivo.write(texto_a_binario(contenido))
 
 print(texto_a_binario(contenido))
