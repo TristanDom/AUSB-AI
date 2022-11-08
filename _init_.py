@@ -1,8 +1,10 @@
 import ExtractorDeCodigo.Scripper
-import ConversorCodigoBinario.Conversor.Conversor
+import ConversorCodigoBinario.Conversor
 
 
-val = ExtractorDeCodigo.Scripper.extraccionCodigoWeb()
+codWeb = ExtractorDeCodigo.Scripper.extraccionCodigoWeb()
 
-print(ConversorCodigoBinario.Conversor.Conversor.texto_a_binario(val))
+codBin = ConversorCodigoBinario.Conversor.texto_a_binario(codWeb)
+
+print(codBin)
 
