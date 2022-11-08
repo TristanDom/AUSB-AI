@@ -30,35 +30,53 @@ páginas web en código binario almacenándolo en archivos txt con la ruta desea
 #     with open(rutaCompleta) as archivo:
 #         contenido = archivo.read()
         
-#Por medio de la función open() se abre el archivo que se desea leer de manera estática.
-with open('ExtractorDeCodigo/IngresoWeb/Web.txt') as archivo:
-    contenido = archivo.read()
+# #Por medio de la función open() se abre el archivo que se desea leer de manera estática.
+# with open('ExtractorDeCodigo/IngresoWeb/Web.txt') as archivo:
+#     contenido = archivo.read()
 
 #Por medio de la fución ascii_a_binario() se convierte carcateres a binario.
-def ascii_a_binario(letra):
+def ascii_a_binario(caracter):
     # Extraer su valor entero
-    valor = ord(letra)
+    valor = ord(caracter)
     # Convertirlo a binario
+    
     return "{0:08b}".format(valor)
+    #return "{0:0>4X}".format(valor) # Para hexadecimales
 
 #Por medio de la función binario_a_ascii() se convierte cadenas de caracteres a código binario.
 def texto_a_binario(texto):
     texto_binario = ""  # El resultado
     contador = 0
-    for letra in texto:
-        texto_binario += ascii_a_binario(letra)
-        # Agregar un espacio entre binarios, excepto si es el último carácter
+    for caracter in texto:
         separador = ","
-        texto_binario += separador
+        texto_binario += ascii_a_binario(caracter)
+        # Agregar un espacio entre binarios, excepto si es el último carácter
+        if contador + 1 < len(texto):
+            texto_binario += separador
         contador += 1
-    return texto_binario
 
-#print(texto_a_binario(contenido))
+        # Agregar un espacio entre binarios, excepto si es el último carácter
+    imp = input("Desea imprimir el código binario?: ")
+    
+    if(imp == "si" or imp == "Si" or imp == "SI" or imp == "s"):
+        print("Imprimiendo código extraído de la página web...")
+        print(texto_binario)
+        return texto_binario
+    else:
+        print("No se imprimirá el código extraído de la página web.")
+        return texto_binario
 
-#Con la implementación de la segunda fución open se sobre esccribe el resultado de convetir cadenas de texto a código binario.
-with open('ConversorCodigoBinario/CodigoConvertido/binario.txt', 'w') as archivo:
-    archivo.write(texto_a_binario(contenido))
-    print("El archivo se ha convertido correctamente.")
+    
+# for n in range(0, len(contenido)):
+#     vecBin.append(texto_a_binario(contenido[n]))
+
+# print(vecBin)
+
+
+# Con la implementación de la segunda fución open se sobre esccribe el resultado de convetir cadenas de texto a código binario.
+# with open('ConversorCodigoBinario/CodigoConvertido/binario.txt', 'w') as archivo:
+#     archivo.write(texto_a_binario(contenido))
+#     print("El archivo se ha convertido correctamente.")
 
 #Imprime el resultado de la extracción de código.
 #print(texto_a_binario(contenido))
