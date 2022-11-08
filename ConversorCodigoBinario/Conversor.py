@@ -22,10 +22,8 @@ def texto_a_binario(texto):
         if contador + 1 < len(texto):
             texto_binario += separador
         contador += 1
-
         # Agregar un espacio entre binarios, excepto si es el último carácter
     imp = input("Desea imprimir el código binario?: ")
-    
     if(imp == "si" or imp == "Si" or imp == "SI" or imp == "s"):
         print("Imprimiendo código extraído de la página web...")
         print(texto_binario)
@@ -33,3 +31,4 @@ def texto_a_binario(texto):
     else:
         print("No se imprimirá el código extraído de la página web.")
         return texto_binario
+
