@@ -1,8 +1,12 @@
 import cv2
 import numpy as np
 from PIL import Image
-import random
+#import random
 import matplotlib.pyplot as plt
+
+#Lectura y almacenamiento del código binario.
+with open('ConversorCodigoBinario/CodigoConvertido/binario.txt') as archivo:
+    contenido = archivo.read()
 
 
 # img1 = np.zeros((10, 8), np.uint8)
