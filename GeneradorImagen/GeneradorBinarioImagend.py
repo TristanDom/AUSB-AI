@@ -4,16 +4,76 @@ from PIL import Image
 import matplotlib.pyplot as plt
 from PIL import Image
 import random
-import ConversorCodigoBinario.Conversor as conversor
 
-dicMapBin = {0: 1, 100: 0.9, 100000: 0.8, 110000: 0.7, 111010: 0.6, 1000000: 0.5, 1011011: 0.4, 1100000:0.3, 1111010: 0.2, 1111111: 0.1, 11111111: 0.0}
+dicMapBin = {1: 0, 0.9: 100, 0.8: 100000, 0.7: 110000, 0.6: 111010, 0.5: 1000000, 0.4: 1011011, 0.3: 1100000, 0.2: 1111010, 0.1: 1111111, 0.0: 11111111}
 
 #Lectura y almacenamiento del código binario.
-with open('ConversorCodigoBinario/CodigoConvertido/binario.txt') as archivo:
-    contenido = archivo.read()
+# ************************************************************************************************************************
 
-print(conversor.texto_a_binario(contenido))
-vecBin = []
+#listInt es el nombre de la lista en enteros.
+#realizar operación para calcuar y ajustar medidas de la imagen.
+tam = (10, 10)
+img = np.ones(tam)
+ct = 0
+num = 1
 
-for n in range(0, len(contenido)):
-    vecBin.append(texto_a_binario(contenido[n]))# print(contenido[0:8])
+listString = ['1000001', '1101110', '11100001', '1101100', '1101001', '11111111', '1110011', '1101001', '1110011', '100000', '1100100', '1100101', '100000', '1110000', '11100001', '1100111', '1101001', '1101110', '1100001', '1110011', '100000', '1110111', '1100101', '1100010', '100000', '1110000', '1101111', '1110010', '100000', '1101101', '1100101', '1100100', '1101001', '1101111', '100000', '1100100', '1100101', '100000', '1110010', '1100101', '1100011', '1110101', '1110000', '1100101', '1110010','1100001', '1100011', '1101001', '11110011', '1101110', '100000', '1100100', '1100101', '100000', '1100100', '1100001', '1110100', '1101111', '1110011', '100000', '1100011', '1101111', '1101110', '100000', '1110111', '1100101', '1100010', '100000', '1110011', '1100011', '1110010', '1100001', '1110000', '1101001']
+listInt = [int(n) for n in listString]
+
+tamTotMat = tam[1] ** 2
+tamTotList = len(listInt)
+
+for y in range(tamTotMat):
+  if(len(listInt) < tamTotMat):
+    print(num)
+    listInt.append(0)
+  num += 1
+for i in range(8):
+  for j in range(8):
+
+    print("Coordenadas: ", i,",", j, " correspondientes a: ", listInt[ct])
+
+    if(listInt[ct] < dicMapBin[1]):
+      print(listInt[ct], "Tiene el valor de 1")
+      img[i,j] = 1
+    elif(listInt[ct] >= dicMapBin[1] and listInt[ct] < dicMapBin[0.9]):
+      print(listInt[ct], "Tiene el valor de 0.9")
+      img[i,j] = 0.9
+    elif(listInt[ct] >= dicMapBin[0.9] and listInt[ct] < dicMapBin[0.8]):
+      print(listInt[ct], "Tiene el valor de 0.8")
+      img[i,j] = 0.8
+    elif(listInt[ct] >= dicMapBin[0.8] and listInt[ct] < dicMapBin[0.7]):
+      print(listInt[ct], "Tiene el valor de 0.7")
+      img[i,j] = 0.7
+    elif(listInt[ct] >= dicMapBin[0.7] and listInt[ct] < dicMapBin[0.6]):
+      print(listInt[ct], "Tiene el valor de 0.6")
+      img[i,j] = 0.6
+    elif(listInt[ct] >= dicMapBin[0.6] and listInt[ct] < dicMapBin[0.5]):
+      print(listInt[ct], "Tiene el valor de 0.5")
+      img[i,j] = 0.5
+    elif(listInt[ct] >= dicMapBin[0.5] and listInt[ct] < dicMapBin[0.4]):
+      print(listInt[ct], "Tiene el valor de 0.4")
+      img[i,j] = 0.4
+    elif(listInt[ct] >= dicMapBin[0.4] and listInt[ct] < dicMapBin[0.3]):
+      print(listInt[ct], "Tiene el valor de 0.3")
+      img[i,j] = 0.3
+    elif(listInt[ct] >= dicMapBin[0.3] and listInt[ct] < dicMapBin[0.2]):
+      print(listInt[ct], "Tiene el valor de 0.2")
+      img[i,j] = 0.2
+    elif(listInt[ct] >= dicMapBin[0.2] and listInt[ct] < dicMapBin[0.1]):
+      print(listInt[ct], "Tiene el valor de 0.1")
+      img[i,j] = 0.1
+    elif(listInt[ct] >= dicMapBin[0.1] and listInt[ct] < dicMapBin[0.0]):
+      print(listInt[ct], "Tiene el valor de 0.0")
+      img[i,j] = 0.0
+    # print(listInt[ct])
+    ct += 1
+  
+print(ct)
+plt.imshow(img,vmin=0,vmax=1)
+plt.waitforbuttonpress(0)
+plt.close()
+
+
+
+# ************************************************************************************************************************
