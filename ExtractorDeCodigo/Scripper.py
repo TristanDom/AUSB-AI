@@ -7,7 +7,9 @@ import requests
 #Realización de función para la extracción de código de una página web, enlazada al archivo principal por medio de módulos y paquetes.
 def extraccionCodigoWeb():
     #Ingreso de la página web a extraer el código.
-    url = input("Ingrese la página web a extraer el código: ")
+    #url = input("Ingrese la página web a extraer el código: ")
+    #Realización de petición a la página web de manera directa.
+    url = "https://github.com/TristanDom/AUSB-AI"
     #Petición de la página web.
     r = requests.get(url)
     soup = BeautifulSoup(r.content, 'html.parser')

@@ -2,33 +2,38 @@
 Este es un programa que convierte código extraído de
 páginas web en código binario almacenándolo en archivos txt con la ruta deseada."""
 
-#Por medio de la fución ascii_a_binario() se convierte carcateres a binario.
+#Lista vacía para almacenar el código binario.
+# listCodBin = []
+
+
+# Se le asigna el parámetro caracter a la función ascii_a_binario().
 def ascii_a_binario(caracter):
     # Extraer su valor entero
     valor = ord(caracter)
     # Convertirlo a binario
-    
     return "{0:08b}".format(valor)
-    #return "{0:0>4X}".format(valor) # Para hexadecimales
+    # return "{0:0>4X}".format(valor) # Para hexadecimales
 
-#Por medio de la función binario_a_ascii() se convierte cadenas de caracteres a código binario.
+
+# Función por mediod de generadores para la conversión de código binario a texto, ejerciendo una mayor eficacia y ahorro de memoria con la generación de objetos iterables.
+# Se le asigna el parámetro texto a la función texto_a_binario().
 def texto_a_binario(texto):
-    texto_binario = ""  # El resultado
-    contador = 0
     for caracter in texto:
-        separador = ","
-        texto_binario += ascii_a_binario(caracter)
-        # Agregar un espacio entre binarios, excepto si es el último carácter
-        if contador + 1 < len(texto):
-            texto_binario += separador
-        contador += 1
-        # Agregar un espacio entre binarios, excepto si es el último carácter
-    imp = input("Desea imprimir el código binario?: ")
-    if(imp == "si" or imp == "Si" or imp == "SI" or imp == "s"):
-        print("Imprimiendo código extraído de la página web...")
-        print(texto_binario)
-        return texto_binario
-    else:
-        print("No se imprimirá el código extraído de la página web.")
-        return texto_binario
+        yield ascii_a_binario(caracter)
 
+
+# Función principal para genera r el código extraído a binario.
+# Se le asigna el parámetro codigo a la función mainConversor().
+def mainConversor(codigo):
+    codConvert = texto_a_binario(codigo)
+    # for bin in codConvert:
+    #     listCodBin.append(bin)
+    imp = input("¿Desea imprimir el código binario en la consola?: ")
+    if (imp == "si" or imp == "Si" or imp == "SI" or imp == "s"):
+        print("El código ha sido convertido a binario y almacenado de forma exitosa.")
+        print("Fin de la impresión del código binario en la consola.")
+        for bin in codConvert:
+            print(bin)
+    else:
+        print("El código ha sido convertido a binario y almacenado de forma exitosa.")
+    return codConvert
