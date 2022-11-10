@@ -2,7 +2,7 @@
 Este es un programa que convierte código extraído de
 páginas web en código binario almacenándolo en archivos txt con la ruta deseada."""
 
-#Lista vacía para almacenar el código binario.
+# Lista vacía para almacenar el código binario.
 # listCodBin = []
 
 
@@ -28,12 +28,13 @@ def mainConversor(codigo):
     codConvert = texto_a_binario(codigo)
     # for bin in codConvert:
     #     listCodBin.append(bin)
-    imp = input("¿Desea imprimir el código binario en la consola?: ")
-    if (imp == "si" or imp == "Si" or imp == "SI" or imp == "s"):
-        print("El código ha sido convertido a binario y almacenado de forma exitosa.")
-        print("Fin de la impresión del código binario en la consola.")
-        for bin in codConvert:
-            print(bin)
-    else:
-        print("El código ha sido convertido a binario y almacenado de forma exitosa.")
+    # imp = input("¿Desea con el código binario en la consola?: ")
+    # if (imp == "si" or imp == "Si" or imp == "SI" or imp == "s"):
+    #     print("El código ha sido convertido a binario y almacenado de forma exitosa.")
+    #     print("Fin de la impresión del código binario en la consola.")
+    #     num = 1
+    #     for bin in codConvert:
+    #         print(bin)
+    # else:
+    #     print("El código ha sido convertido a binario y almacenado de forma exitosa.")
     return codConvert
