@@ -8,14 +8,13 @@ import os
 from PIL import Image
 import sys
 import time
-import matplotlib.pyplot as plt
 
 '''
 Authenticate
 Authenticates your credentials and creates a client.
 '''
-subscription_key = "c3f83fd12eef463cb0432303eca09f21"
-endpoint = "https://comparadorimagenesia.cognitiveservices.azure.com/"
+subscription_key = "69ca85c4f62940439a0e71c084ada721"
+endpoint = "https://southcentralus.api.cognitive.microsoft.com/"
 
 computervision_client = ComputerVisionClient(endpoint, CognitiveServicesCredentials(subscription_key))
 '''
@@ -23,72 +22,45 @@ END - Authenticate
 '''
 
 '''
-Quickstart variables
-These variables are shared by several examples
+OCR: Read File using the Read API, extract text - remote
+This example will extract text in an image, then print results, line by line.
+This API call can also extract handwriting style text (not shown).
 '''
-# Images used for the examples: Describe an image, Categorize an image, Tag an image, 
-# Detect faces, Detect adult or racy content, Detect the color scheme, 
-# Detect domain-specific content, Detect image types, Detect objects
-images_folder = os.path.join (os.path.dirname(os.path.abspath(__file__)), "images")
-remote_image_url = "https://github.com/TristanDom/AUSB-AI/blob/main/PaginasEscaneadas/PaginasConfiables/adobe.png"
-'''
-END - Quickstart variables
-'''
+print("===== Read File - remote =====")
+# Get an image with text
+read_image_url = "https://raw.githubusercontent.com/TristanDom/AUSB-AI/main/PaginasEscaneadas/PaginasConfiables/disney.png"
 
+# Call API with URL and raw response (allows you to get the operation location)
+read_response = computervision_client.read(read_image_url,  raw=True)
 
-'''
-Tag an Image - remote
-This example returns a tag (key word) for each thing in the image.
-'''
-print("===== Tag an image - remote =====")
-# Call API with remote image
-tags_result_remote = computervision_client.tag_image(remote_image_url )
-
-# Print results with confidence score
-print("Tags in the remote image: ")
-if (len(tags_result_remote.tags) == 0):
-    print("No tags detected.")
-else:
-    for tag in tags_result_remote.tags:
-        print("'{}' with confidence {:.2f}%".format(tag.name, tag.confidence * 100))
-print()
-'''
-END - Tag an Image - remote
-'''
-print("End of Computer Vision quickstart.")
-
+# Get the operation location (URL with an ID at the end) from the response
+read_operation_location = read_response.headers["Operation-Location"]
+# Grab the ID from the URL
+operation_id = read_operation_location.split("/")[-1]
 
 print("===== Analyze an image - remote =====")
 # Select the visual feature(s) you want.
-
 remote_image_features = ["tags"]
+# remote_image_details = ["PaginasConfiables","PaginasDesconfiables"]
 
-# Call API with URL and features
-results_remote = computervision_client.analyze_image(remote_image_url , remote_image_features, remote_image_details)
 
-# Print results with confidence score
-print("Categories from remote image: ")
-if (len(results_remote.categories) == 0):
-    print("No categories detected.")
-else:
-    for category in results_remote.categories:
-        print("'{}' with confidence {:.2f}%".format(category.name, category.score * 100))
+
+# Call the "GET" API and wait for it to retrieve the results 
+while True:
+    read_result = computervision_client.get_read_result(operation_id)
+    if read_result.status not in ['notStarted', 'running']:
+        break
+    time.sleep(1)
+
+# Print the detected text, line by line
+if read_result.status == OperationStatusCodes.succeeded:
+    for text_result in read_result.analyze_result.read_results:
+        for line in text_result.lines:
+            print(line.text)
+            print(line.bounding_box)
 print()
+'''
+END - Read File - remote
+'''
 
-
-# Return tags
-# Print results with confidence score
-print("Tags in the remote image: ")
-if (len(results_remote.tags) == 0):
-    print("No tags detected.")
-else:
-    for tag in results_remote.tags:
-        print("'{}' with confidence {:.2f}%".format(tag.name, tag.confidence * 100))
-
-# Detect landmarks
-print("Landmarks in the remote image:")
-if len(results_remote.categories.detail.landmarks) == 0:
-    print("No landmarks detected.")
-else:
-    for landmark in results_remote.categories.detail.landmarks:
-        print(landmark["name"])
+print("End of Computer Vision quickstart.")
