@@ -10,11 +10,10 @@ from PIL import Image
 # codBin = ConversorCodigoBinario.Conversor.texto_a_binario(codWeb)
 # val = codBin.split(",")
 # Lectura y almacenamiento del código binario.
-
 # Valores necesarios para la generación de la imagen.
 
 def evaluarValoresMap(listString):
-    tam = (500, 500)
+    tam = (1000, 1000)
     img = np.ones(tam)
     ct = 0
     dicMapBinP = {1: 0, 0.9: 100, 0.8: 100000, 0.7: 110000, 0.6: 111010, 0.5: 1000000,
@@ -29,8 +28,8 @@ def evaluarValoresMap(listString):
     for y in range(tamTotMat):
         if (len(listInt) < tamTotMat):
             listInt.append(0)
-    for i in range(500):
-        for j in range(500):
+    for i in range(1000):
+        for j in range(1000):
             # print("Coordenadas: ", i, ",", j, " correspondientes a: ", listInt[ct])
             if (listInt[ct] < dicMapBinP[1]):
                 # print(listInt[ct], "Tiene el valor de 1")
@@ -70,7 +69,9 @@ def evaluarValoresMap(listString):
     plt.imshow(img, vmin=0, vmax=1)
     plt.waitforbuttonpress(0)
     plt.close()
-    plt.imsave('new_1.png',img)
+    # plt.imsave('new_1.png',img)
+    # plt.savefig('new_1.png')
+    # return img
 
 # evaluarValoresMap()
 # plt.savefig("GeneradorImagen/imGenBin.png")

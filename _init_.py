@@ -14,17 +14,20 @@ if (resp == "si" or resp == "Si" or resp == "SI" or resp == "s"):
     print("Iniciando proceso de reconocimiento de sítios maliciosos...")
     print("Iniciando proceso de extracción de código...")
     # Llamado de la función de extracción de código de la página web y almacenado del código extraído en la variable 'codigo'.
-    codWeb = ExtractorDeCodigo.Scripper.extraccionCodigoWeb()
-    print("Iniciando proceso de conversión de código a binario...")
-    # Llamado de la función de conversión de código a binario y almacenado del código binario en la variable 'codigoBinario'.
-    # codBin = ConversorCodigoBinario.Conversor.texto_a_binario(codWeb)
+    while True:
+        codWeb = ExtractorDeCodigo.Scripper.extraccionCodigoWeb()
+            # print("Iniciando proceso de conversión de código a binario...")
+            # Llamado de la función de conversión de código a binario y almacenado del código binario en la variable 'codigoBinario'.
+            # codBin = ConversorCodigoBinario.Conversor.texto_a_binario(codWeb)
 
-    codBin = ConversorCodigoBinario.Conversor.mainConversor(codWeb)
+        codBin = ConversorCodigoBinario.Conversor.mainConversor(codWeb)
+
+        for bin in codBin:
+            listBin.append(bin)
+
+        print(GeneradorImagen.GeneradorBinarioImagend.evaluarValoresMap(listBin))
+
+        print("Fin del proceso de reconocimiento de sítios maliciosos.")
 else:
     print("No se iniciará el proceso de reconocimiento de sítios maliciosos.")
     exit()
-
-for bin in codBin:
-    listBin.append(bin)
-
-print(GeneradorImagen.GeneradorBinarioImagend.evaluarValoresMap(listBin))
